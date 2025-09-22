@@ -6,60 +6,37 @@ use Illuminate\Http\Request;
 
 class PegawaiController extends Controller
 {
-   /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        // Data yang akan dikirimkan ke view
-        $data = [];
+        // Example data (customize as needed)
+        $name = 'clearesta';
+        $birthdate = '2006-08-02';
+        $hobbies = ['Ngoding', 'Futsal', 'Mendengarkan Musik', 'Makan', 'Traveling'];
+        $tgl_harus_wisuda = '2028-10-28';
+        $current_semester = 3;
+        $future_goal = 'Menjadi Software Engineer di perusahaan besar';
 
-        // Nama
-        $data['name'] = 'Heroku'; // Ganti dengan nama sesuai kebutuhan
+        // Calculate age
+        $my_age = \Carbon\Carbon::parse($birthdate)->age;
+        // Calculate days left to graduation
+        $today = \Carbon\Carbon::now();
+        $wisuda = \Carbon\Carbon::parse($tgl_harus_wisuda);
+        $time_to_study_left = $today->diffInDays($wisuda, false);
 
-        // Umur (dihitung berdasarkan tanggal lahir)
-        $tanggal_lahir = '2000-01-01'; // Ganti dengan tanggal lahir yang sesuai
-        $umur = date_diff(date_create($tanggal_lahir), date_create('today'))->y;
-        $data['my_age'] = $umur;
+        // Conditional message
+        $message = $current_semester < 3
+            ? 'Masih Awal, Kejar TAK'
+            : 'Jangan main-main, kurang-kurangi main game!';
 
-        // Hobi (minimal 5 item)
-        $data['hobbies'] = ['Membaca', 'Berenang', 'Bermain Game', 'Fotografi', 'Berjalan-jalan'];
-
-        // Tanggal Harus Wisuda
-        $data['tgl_harus_wisuda'] = '2025-07-01'; // Ganti dengan tanggal wisuda yang sesuai
-        $tgl_harus_wisuda = new DateTime($data['tgl_harus_wisuda']);
-        $hari_ini = new DateTime();
-        $interval = $hari_ini->diff($tgl_harus_wisuda);
-        $data['time_to_study_left'] = $interval->days;
-
-        // Semester saat ini
-        $data['current_semester'] = 4; // Ganti dengan semester saat ini
-        if ($data['current_semester'] < 3) {
-            $data['study_message'] = "Masih Awal, Kejar TAK";
-        } else {
-            $data['study_message'] = "Jangan main-main, kurang-kurangi main game!";
-        }
-
-        // Cita-cita
-        $data['future_goal'] = 'Menjadi Developer yang handal';
-
-        // Menampilkan data ke view
-        return view('home', $data);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        // Implementasi logika untuk halaman form create
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        // Implementasi logika untuk menyimpan data
+        return view('pegawai-index', [
+            'name' => $name,
+            'my_age' => $my_age,
+            'hobbies' => $hobbies,
+            'tgl_harus_wisuda' => $tgl_harus_wisuda,
+            'time_to_study_left' => $time_to_study_left,
+            'current_semester' => $current_semester,
+            'future_goal' => $future_goal,
+            'message' => $message,
+        ]);
     }
 }
