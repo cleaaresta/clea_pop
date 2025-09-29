@@ -11,10 +11,10 @@ class PegawaiController extends Controller
         // Example data (customize as needed)
         $name = 'clearesta';
         $birthdate = '2006-08-02';
-        $hobbies = ['Ngoding', 'Futsal', 'Mendengarkan Musik', 'Makan', 'Traveling'];
+        $hobbies = ['Shopping', 'Nonton', 'Mendengarkan Musik', 'Makan', 'Traveling'];
         $tgl_harus_wisuda = '2028-10-28';
         $current_semester = 3;
-        $future_goal = 'Menjadi Software Engineer di perusahaan besar';
+        $future_goal = 'Menjadi Wanita Karir';
 
         // Calculate age
         $my_age = \Carbon\Carbon::parse($birthdate)->age;
