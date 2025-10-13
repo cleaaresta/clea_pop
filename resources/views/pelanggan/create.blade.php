@@ -453,7 +453,8 @@
         <div class="row">
             <div class="card border-0 shadow components-section">
                 <div class="card-body">
-                    <form>
+                    <form action="{{ route('pelanggan.store') }}" method="POST">
+                        @csrf
                         <h5 class="mb-4">Form Data Pelanggan</h5>
                         <div class="row">
                             <div class="col-lg-6 col-sm-12">
@@ -527,7 +528,7 @@
                             </div>
                         </div>
                         <div class="mt-3">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary">Simpan Pelanggan</button>
                         </div>
                     </form>
                 </div>
