@@ -69,11 +69,25 @@ The above copyright notice and this permission notice shall be included in all c
                                 height="20" width="20" alt="Volt Logo"> </span> <span
                             class="mt-1 ms-1 sidebar-text">Volt Overview</span> </a> </li>
                 <li class="nav-item  active "> <a href="{{ route('dashboard') }}" class="nav-link"> <span
-                            class="sidebar-icon"> <svg class="icon icon-xs me-2" fill="currentColor"
-                                viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            class=""> <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
                                 <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
                                 <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
                             </svg> </span> <span class="sidebar-text">Dashboard</span> </a> </li>
+                <li class="nav-item  active ">
+                    <a href="pelanggan/create" class="nav-link">
+                        <span class="sidebar-icon">
+                            <svg class="icon icon-xs me-2" data-slot="icon" fill="none" stroke-width="1.5"
+                                stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z">
+                                </path>
+                            </svg>
+                        </span>
+                        <span class="sidebar-text">Pelanggan</span>
+                    </a>
+                </li>
                 <li class="nav-item"> <span
                         class="nav-link  collapsed  d-flex justify-content-between align-items-center"
                         data-bs-toggle="collapse" data-bs-target="#submenu-app"> <span> <span class="sidebar-icon">
@@ -195,7 +209,8 @@ The above copyright notice and this permission notice shall be included in all c
                                             <path fill-rule="evenodd"
                                                 d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
                                                 clip-rule="evenodd"></path>
-                                        </svg> View all </a> </div>
+                                        </svg> View all </a>
+                                </div>
                             </div>
                         </li>
                         <li class="nav-item dropdown ms-lg-3"> <a class="nav-link dropdown-toggle pt-1 px-0"
@@ -761,4 +776,5 @@ The above copyright notice and this permission notice shall be included in all c
     <!-- Vendor JS -->
     <script src="assets-admin/vendor/onscreen/dist/on-screen.umd.min.js"></script>
 </body>
+
 </html>
