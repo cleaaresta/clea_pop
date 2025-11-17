@@ -1,5 +1,4 @@
 <?php
-
 namespace Database\Seeders;
 
 use App\Models\User;
@@ -13,10 +12,12 @@ class CreateFirstUser extends Seeder
      */
     public function run(): void
     {
+        User::factory()->count(1000)->create();
+
         User::create([
-            'name' => 'Admin',
-            'email' => 'clearesta24si@mahasiswa.pcr.ac.id',
-            'password' => Hash::make('clearesta')
+            'name'     => 'clea',
+            'email'    => 'clea@gmail.com',
+            'password' => Hash::make('clea'),
         ]);
     }
 }

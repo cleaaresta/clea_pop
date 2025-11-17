@@ -9,10 +9,14 @@ class PelangganController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data['dataPelanggan'] = Pelanggan::paginate(10);
-        return view('pelanggan.index', $data);
+        $filterableColumns         = ['gender'];
+        $searchableColumns         = ['first_name', 'last_name', 'email'];
+        $pageData['dataPelanggan'] = Pelanggan::filter($request, $filterableColumns)->
+            search($request, $searchableColumns)->
+            paginate(10)->WithQueryString();
+        return view('Admin.pelanggan.index', $pageData);
     }
 
     /**
@@ -20,7 +24,7 @@ class PelangganController extends Controller
      */
     public function create()
     {
-        return view('pelanggan.create');
+        return view('Admin.pelanggan.create');
     }
 
     /**
@@ -29,7 +33,6 @@ class PelangganController extends Controller
     public function store(Request $request)
     {
 
-        //dd($request->all());
         $data['first_name'] = $request->first_name;
         $data['last_name']  = $request->last_name;
         $data['birthday']   = date('Y-m-d', strtotime($request->birthday));
@@ -39,7 +42,7 @@ class PelangganController extends Controller
 
         Pelanggan::create($data);
 
-        return redirect()->route('pelanggan.create')->with('success', 'Penambahan Data Berhasil!');
+        return redirect()->route('pelanggan.index')->with('success', 'Penambahan Data Berhasil!');
     }
 
     /**
@@ -55,7 +58,8 @@ class PelangganController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data['dataPelanggan'] = Pelanggan::findOrFail($id);
+        return view('Admin.pelanggan.edit', $data);
     }
 
     /**
