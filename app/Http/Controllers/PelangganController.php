@@ -6,33 +6,28 @@ use Illuminate\Http\Request;
 
 class PelangganController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request)
     {
-        $filterableColumns         = ['gender'];
-        $searchableColumns         = ['first_name', 'last_name', 'email'];
-        $pageData['dataPelanggan'] = Pelanggan::filter($request, $filterableColumns)->
-            search($request, $searchableColumns)->
-            paginate(10)->WithQueryString();
-        return view('Admin.pelanggan.index', $pageData);
+        // 1. Tentukan kolom yang mau difilter (sesuai name di select option view)
+        $filterableColumns = ['gender'];
+
+        // 2. Panggil scopeFilter di Model, kirim request dan daftar kolom
+        $data['dataPelanggan'] = Pelanggan::filter($request, $filterableColumns)->paginate(10);
+
+        // 3. Tambahkan appends agar filter tidak hilang saat klik halaman 2
+        $data['dataPelanggan']->appends($request->all());
+
+        return view('pelanggan.index', $data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    // ... (Biarkan function create, store, dll di bawahnya tetap sama) ...
     public function create()
     {
-        return view('Admin.pelanggan.create');
+        return view('pelanggan.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-
         $data['first_name'] = $request->first_name;
         $data['last_name']  = $request->last_name;
         $data['birthday']   = date('Y-m-d', strtotime($request->birthday));
@@ -41,40 +36,17 @@ class PelangganController extends Controller
         $data['phone']      = $request->phone;
 
         Pelanggan::create($data);
-
-        return redirect()->route('pelanggan.index')->with('success', 'Penambahan Data Berhasil!');
+        return redirect()->route('pelanggan.create')->with('success', 'Penambahan Data Berhasil!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        $data['dataPelanggan'] = Pelanggan::findOrFail($id);
-        return view('Admin.pelanggan.edit', $data);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        //
+         $pelanggan = Pelanggan::findOrFail($id);
+         $pelanggan->delete();
+         return redirect()->back()->with('success', 'Data berhasil dihapus');
     }
+
+    public function edit(string $id){}
+    public function update(Request $request, string $id){}
+    public function show(string $id){}
 }
