@@ -103,11 +103,11 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="mt-3">
+                        {{ $dataPelanggan->links() }}
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="mt-3">
-        {{ $dataPelanggan->links('pagination::bootstrap-5') }}
     </div>
 @endsection
