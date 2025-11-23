@@ -9,8 +9,6 @@ class Pelanggan extends Model
 {
     protected $table = 'pelanggan';
     protected $primaryKey = 'pelanggan_id';
-
-    // PERBAIKAN 1: Sebelumnya 'protectd' (Typo), ubah jadi 'protected'
     protected $fillable = [
         'first_name',
         'last_name',
@@ -20,16 +18,43 @@ class Pelanggan extends Model
         'phone',
     ];
 
-    // PERBAIKAN 2: Menyesuaikan parameter agar cocok dengan Controller
-    public function scopeFilter(Builder $query, $request, array $filterableColumns)
+    /**
+     * Scope: Filter berdasarkan kolom yang dapat difilter
+     */
+    public function scopeFilter(Builder $query, $request, array $filterableColumns = []): Builder
     {
-        foreach ($filterableColumns as $column) {
-            // Cek apakah user memilih filter untuk kolom ini (misal: gender)
-            if ($request->filled($column)) {
-                $query->where($column, $request->input($column));
-            }
+        if (!$request) {
+            return $query;
         }
 
+        foreach ($filterableColumns as $column) {
+            if ($request->has($column) && $request->filled($column)) {
+                $value = $request->input($column);
+                $query->where($column, $value);
+            }
+        }
         return $query;
+    }
+
+    /**
+     * Scope: Search berdasarkan kolom yang dapat dicari
+     */
+    public function scopeSearch(Builder $query, $request, array $searchableColumns = []): Builder
+    {
+        if (!$request || !$request->filled('search')) {
+            return $query;
+        }
+
+        $searchTerm = $request->input('search');
+
+        return $query->where(function (Builder $q) use ($searchTerm, $searchableColumns) {
+            foreach ($searchableColumns as $index => $column) {
+                if ($index === 0) {
+                    $q->where($column, 'like', '%' . $searchTerm . '%');
+                } else {
+                    $q->orWhere($column, 'like', '%' . $searchTerm . '%');
+                }
+            }
+        });
     }
 }
