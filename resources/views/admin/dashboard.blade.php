@@ -85,7 +85,7 @@ The above copyright notice and this permission notice shall be included in all c
                                 </path>
                             </svg>
                         </span>
-                        <span class="sidebar-text">Pelanggan</span>
+                        <span class="sidebar-text">Pelanggann</span>
                     </a>
                 </li>
                 <li class="nav-item"> <span
