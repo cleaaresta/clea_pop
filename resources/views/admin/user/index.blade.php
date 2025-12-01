@@ -14,7 +14,7 @@
         <div class="container py-4">
             <div class="d-flex justify-content-between mb-3">
                 <h3>Daftar Users</h3>
-                <a href="{{ route('users.create') }}" class="btn btn-primary">Tambah User</a>
+                <a href="{{ route('user.create') }}" class="btn btn-primary">Tambah User</a>
             </div>
 
             @if (session('success'))
@@ -26,7 +26,7 @@
                     @if ($dataUser->count())
                         <div class="table-responsive">
                             <table class="table table-striped">
-                                <form method="GET" action="{{ route('users.index') }}" class="mb-3">
+                                <form method="GET" action="{{ route('user.index') }}" class="mb-3">
                                     <div class="row">
 
                                         <!-- FILTER VERIFIED -->
@@ -90,10 +90,10 @@
                                             <td>{{ $user->email }}</td>
                                             <td>{{ $user->created_at->format('Y-m-d') }}</td>
                                             <td>
-                                                <a href="{{ route('users.edit', $user->id) }}"
+                                                <a href="{{ route('user.edit', $user->id) }}"
                                                     class="btn btn-sm btn-warning">Edit</a>
 
-                                                <form action="{{ route('users.destroy', $user->id) }}" method="POST"
+                                                <form action="{{ route('user.destroy', $user->id) }}" method="POST"
                                                     class="d-inline" onsubmit="return confirm('Hapus user ini?');">
                                                     @csrf
                                                     @method('DELETE')
